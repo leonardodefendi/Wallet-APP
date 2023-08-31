@@ -8,7 +8,7 @@ export type ActionUser = {
 
 export type WalletType = {
   currencies: string[],
-  expenses: any[],
+  expenses: ExpenseType[],
   editor: boolean,
   idToEdit: number,
 };

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import { fetchCurrencies } from '../redux/actions';
 import { Dispatch } from '../types';
+import Table from '../components/Table';
 
 function Wallet() {
   const dispatch: Dispatch = useDispatch();
@@ -16,6 +17,10 @@ function Wallet() {
       <div>TrybeWallet</div>
       <Header />
       <WalletForm />
+      <div>
+        <Table />
+
+      </div>
     </>
   );
 }
