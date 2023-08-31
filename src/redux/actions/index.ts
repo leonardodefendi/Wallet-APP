@@ -1,11 +1,14 @@
 // Coloque aqui suas actions
-import { Dispatch, AddCurenciesType, AddExchangeType, FormValuesType } from '../../types';
+import { Dispatch, AddCurenciesType, AddExchangeType, FormValuesType,
+  GlobalStateType } from '../../types';
 
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REQUESTED_API = 'REQUESTED_API';
 export const ERROR_API = 'ERROR_API';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const FINISH_EDIT_EXPENSE = 'FINISH_EDIT_EXPENSE';
 
 export const addEmail = (email: string) => ({
   type: ADD_EMAIL,
@@ -30,6 +33,16 @@ const errorApi = (error: string) => ({
 
 export const deleteExpense = (newArray: FormValuesType) => ({
   type: DELETE_EXPENSE,
+  payload: newArray,
+});
+
+export const editExpense = (id: string) => ({
+  type: EDIT_EXPENSE,
+  payload: id,
+});
+
+export const finishEditExpense = (newArray: GlobalStateType) => ({
+  type: FINISH_EDIT_EXPENSE,
   payload: newArray,
 });
 

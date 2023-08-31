@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { GlobalStateType } from '../types';
 import currencyAtt from '../utils/currencyAtt';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, editExpense } from '../redux/actions';
 
 function Table() {
   const { wallet: { expenses } } = useSelector((state:GlobalStateType) => state);
@@ -11,6 +11,12 @@ function Table() {
     const newExpense = expenses
       .filter((expense) => (expense.id).toString() !== target.id);
     dispatch(deleteExpense(newExpense));
+  };
+  const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const target = event.target as HTMLButtonElement;
+    const teste = expenses[Number(target.id)];
+    const index = expenses.indexOf(teste);
+    dispatch(editExpense(index));
   };
   return (
     <table>
@@ -82,6 +88,14 @@ function Table() {
                 Excluir
 
               </button>
+              <button
+                id={ (expense.id).toString() }
+                data-testid="edit-btn"
+                onClick={ handleEdit }
+              >
+                Editar
+
+              </button>
 
             </td>
           </tr>
@@ -92,3 +106,6 @@ function Table() {
 }
 
 export default Table;
+// const newExpense = expenses
+// .filter((expense) => (expense.id).toString() !== target.id)
+// .map((despesa, index) => ({ ...despesa, id: index }));

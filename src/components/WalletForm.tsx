@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { GlobalStateType, FormValuesType, Dispatch } from '../types';
-import { newExpenses } from '../redux/actions';
+import { newExpenses, finishEditExpense } from '../redux/actions';
 
 const initialState = {
   id: 0,
@@ -16,6 +16,7 @@ function WalletForm() {
   const rootState = useSelector((state: GlobalStateType) => state);
   const dispatch: Dispatch = useDispatch();
   const [formValues, setFormValues] = useState<FormValuesType>(initialState);
+
   const handleChange = (event:
   React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -24,15 +25,30 @@ function WalletForm() {
       [name]: value,
     });
   };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const idNumber = rootState.wallet.expenses.length - 1;
+    if (rootState.wallet.editor) {
+      const newArray = rootState.wallet.expenses.map((expense) => {
+        if (expense.id === rootState.wallet.idToEdit) {
+          return { ...expense,
+            ...formValues,
+            id: rootState.wallet.idToEdit };
+        }
+        return expense;
+      });
+      return dispatch(finishEditExpense(newArray));
+    }
     if (rootState.wallet.expenses.length === 0) {
       dispatch(newExpenses(formValues));
     } else {
-      dispatch(newExpenses({ ...formValues, id: rootState.wallet.expenses.length }));
+      dispatch(newExpenses({ ...formValues,
+        id: rootState.wallet.expenses[idNumber].id + 1 }));
     }
     setFormValues(initialState);
   };
+
   return (
     <form action="" onSubmit={ handleSubmit }>
       <label htmlFor="">
@@ -82,7 +98,9 @@ function WalletForm() {
         <option value="Transporte">Transporte</option>
         <option value="Saúde">Saúde</option>
       </select>
-      <button>Adicionar despesa</button>
+      {!rootState.wallet.editor
+        ? <button>Adicionar despesa</button>
+        : <button>Editar despesa</button>}
     </form>
   );
 }

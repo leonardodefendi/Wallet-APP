@@ -17,10 +17,8 @@ function Wallet() {
       <div>TrybeWallet</div>
       <Header />
       <WalletForm />
-      <div>
-        <Table />
+      <Table />
 
-      </div>
     </>
   );
 }
