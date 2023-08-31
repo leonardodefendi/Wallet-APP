@@ -66,7 +66,7 @@ function Table() {
             <td>
               Real
             </td>
-            <button>Edditar</button>
+            <button>Excluir</button>
           </tr>
         )) }
       </tbody>
