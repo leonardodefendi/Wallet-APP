@@ -5,7 +5,6 @@ import { Dispatch, AddCurenciesType, AddExchangeType, FormValuesType,
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REQUESTED_API = 'REQUESTED_API';
-export const ERROR_API = 'ERROR_API';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const FINISH_EDIT_EXPENSE = 'FINISH_EDIT_EXPENSE';
@@ -26,10 +25,10 @@ const addExpense = (exchanges: AddExchangeType) => ({
   payload: exchanges,
 });
 
-const errorApi = (error: string) => ({
-  type: ERROR_API,
-  payload: error,
-});
+// const errorApi = (error: string) => ({
+//   type: ERROR_API,
+//   payload: error,
+// });
 
 export const deleteExpense = (newArray: FormValuesType) => ({
   type: DELETE_EXPENSE,
@@ -55,7 +54,7 @@ export const fetchCurrencies = () => {
       const currencies = Object.keys(rest);
       dispatch(addCurrencies({ currencies }));
     } catch (error: any) {
-      dispatch(errorApi(error.message));
+      console.log(error);
     }
   };
 };
@@ -68,7 +67,7 @@ export const newExpenses = (expense: FormValuesType) => {
       // const { USDT, ...rest } = data;
       dispatch(addExpense({ data, expense }));
     } catch (error: any) {
-      dispatch(errorApi(error.message));
+      console.log(error);
     }
   };
 };
