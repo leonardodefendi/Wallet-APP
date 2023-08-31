@@ -10,7 +10,7 @@ function Header() {
         <p data-testid="email-field">{rootState.user.email}</p>
         <p data-testid="total-field">
           {rootState.wallet.expenses.length > 0
-            ? sumValues(rootState.wallet.expenses) : 0}
+            ? sumValues(rootState.wallet.expenses) : (0).toFixed(2)}
 
         </p>
         <p data-testid="header-currency-field">BRL</p>

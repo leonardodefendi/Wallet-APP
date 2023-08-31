@@ -1,10 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { GlobalStateType } from '../types';
 import currencyAtt from '../utils/currencyAtt';
+import { deleteExpense } from '../redux/actions';
 
 function Table() {
   const { wallet: { expenses } } = useSelector((state:GlobalStateType) => state);
-  console.log(expenses);
+  const dispatch = useDispatch();
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const target = event.target as HTMLButtonElement;
+    const newExpense = expenses
+      .filter((expense) => (expense.id).toString() !== target.id);
+    dispatch(deleteExpense(newExpense));
+  };
   return (
     <table>
       <thead>
@@ -66,7 +73,17 @@ function Table() {
             <td>
               Real
             </td>
-            <button>Excluir</button>
+            <td>
+              <button
+                id={ (expense.id).toString() }
+                onClick={ handleDelete }
+                data-testid="delete-btn"
+              >
+                Excluir
+
+              </button>
+
+            </td>
           </tr>
         )) }
       </tbody>

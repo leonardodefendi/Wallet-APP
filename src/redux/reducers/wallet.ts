@@ -1,5 +1,5 @@
 import { ActionWalletType } from '../../types';
-import { REQUESTED_API, newExpenses, ADD_EXPENSE } from '../actions';
+import { REQUESTED_API, ADD_EXPENSE, DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -21,7 +21,11 @@ const walletReducer = (state = INITIAL_STATE, action: ActionWalletType) => {
         expenses: [...state.expenses, { ...action.payload.expense,
           exchangeRates: action.payload.data }],
       };
-    }
+    } case DELETE_EXPENSE:
+      return {
+        ...state,
+        expenses: action.payload,
+      };
     default:
       return state;
   }

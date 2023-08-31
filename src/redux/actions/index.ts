@@ -5,6 +5,7 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REQUESTED_API = 'REQUESTED_API';
 export const ERROR_API = 'ERROR_API';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const addEmail = (email: string) => ({
   type: ADD_EMAIL,
@@ -25,6 +26,11 @@ const addExpense = (exchanges: AddExchangeType) => ({
 const errorApi = (error: string) => ({
   type: ERROR_API,
   payload: error,
+});
+
+export const deleteExpense = (newArray: FormValuesType) => ({
+  type: DELETE_EXPENSE,
+  payload: newArray,
 });
 
 export const fetchCurrencies = () => {
