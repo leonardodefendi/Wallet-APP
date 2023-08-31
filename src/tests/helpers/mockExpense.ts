@@ -1,4 +1,3 @@
-import Wallet from '../../pages/Wallet';
 import mockData from './mockData';
 
 export const expense = {

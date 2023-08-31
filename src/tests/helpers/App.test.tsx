@@ -1,15 +1,12 @@
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { screen } from '@testing-library/react';
-import { $CombinedState } from 'redux';
 import App from '../../App';
 import { renderWithRouterAndRedux } from './renderWith';
 import mockFetch from './mockFetch';
 import { INITIAL_STATE, INITIAL_STATE_EXPENSES } from './mockExpense';
 import sumValues from '../../utils/sumValues';
 import currencyAtt from '../../utils/currencyAtt';
-import { deleteExpense } from '../../redux/actions';
-import { store } from '../../redux';
 
 vi.mock('../../utils/sumValues');
 vi.mock('../../utils/currencyAtt');
@@ -57,7 +54,9 @@ describe('2 - Verifica a pagina da carteira', () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'], initialState: INITIAL_STATE });
     const change = screen.getByRole('cell', { name: /dólar americano\/real brasileiro/i });
     const btnExcluir = screen.getByRole('button', { name: /excluir/i });
+    expect(btnExcluir).toBeInTheDocument();
     const btnEditar = screen.getByRole('button', { name: /editar/i });
+    expect(btnEditar).toBeInTheDocument();
     expect(change).toBeInTheDocument();
   });
   test('Verifica o estado do redux sem expenses', () => {
