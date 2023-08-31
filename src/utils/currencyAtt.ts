@@ -1,8 +1,8 @@
 import { ExpenseType } from '../types';
 
-const currencyAtt = (teste: ExpenseType) => {
-  const moeda = teste.currency;
-  const change = teste.exchangeRates[moeda].name;
+const currencyAtt = (expense: ExpenseType) => {
+  const moeda = expense.currency;
+  const change = expense.exchangeRates[moeda].name;
   return change;
 };
 

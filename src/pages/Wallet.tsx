@@ -10,7 +10,7 @@ function Wallet() {
   const dispatch: Dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCurrencies());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

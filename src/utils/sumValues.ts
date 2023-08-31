@@ -3,7 +3,7 @@ import { ExpenseType } from '../types';
 const sumValues = (expenses: ExpenseType[]) => {
   console.log(expenses);
   if (expenses.length > 0) {
-    const value = expenses.reduce((acc, curr) => {
+    const value = expenses.reduce((acc, curr:ExpenseType) => {
       const coinValue = Number(curr.exchangeRates[curr.currency].ask);
       acc += (Number(curr.value) * coinValue);
       return acc;
