@@ -16,7 +16,6 @@ function WalletForm() {
   const rootState = useSelector((state: GlobalStateType) => state);
   const dispatch: Dispatch = useDispatch();
   const [formValues, setFormValues] = useState<FormValuesType>(initialState);
-
   const handleChange = (event:
   React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;

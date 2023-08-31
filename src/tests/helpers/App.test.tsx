@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react';
 import App from '../../App';
 import { renderWithRouterAndRedux } from './renderWith';
 import mockFetch from './mockFetch';
+import { INITIAL_STATE } from './mockExpense';
 
 describe('1- Verifica a página de login', () => {
   test('Verifica se é renderizada da maneira correta', () => {
@@ -40,5 +41,10 @@ describe('2 - Verifica a pagina da carteira', () => {
   test('Verifica se a função fetch é chamada', () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
     expect(global.fetch).toHaveBeenCalled();
+  });
+  test('Verifica o estado do redux', () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'], initialState: INITIAL_STATE });
+    const change = screen.getByRole('cell', { name: /dólar americano\/real brasileiro/i });
+    expect(change).toBeInTheDocument();
   });
 });
