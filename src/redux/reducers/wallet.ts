@@ -34,7 +34,7 @@ const walletReducer = (state = INITIAL_STATE, action: ActionWalletType) => {
         idToEdit: action.payload,
       };
     case FINISH_EDIT_EXPENSE:
-      console.log(action.payload);
+
       return {
         ...state,
         editor: false,

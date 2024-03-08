@@ -5,6 +5,7 @@ import WalletForm from '../components/WalletForm';
 import { fetchCurrencies } from '../redux/actions';
 import { Dispatch } from '../types';
 import Table from '../components/Table';
+import { DataContainer } from '../styles/Wallet.styled';
 
 function Wallet() {
   const dispatch: Dispatch = useDispatch();
@@ -14,11 +15,11 @@ function Wallet() {
 
   return (
     <>
-      <div>TrybeWallet</div>
       <Header />
-      <WalletForm />
-      <Table />
-
+      <DataContainer>
+        <WalletForm />
+        <Table />
+      </DataContainer>
     </>
   );
 }

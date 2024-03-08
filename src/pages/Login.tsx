@@ -2,6 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addEmail } from '../redux/actions';
+import {
+  Form, InputsContainer, Heading,
+  ImgLogin, WalletSpan, InputLabel, ButtonLogin,
+} from '../styles/Login.styled';
 
 const initialState = {
   email: '',
@@ -12,7 +16,7 @@ function Login() {
   const navigate = useNavigate();
   const dispach = useDispatch();
   const handleChangeLogin = (event:
-  React.ChangeEvent<HTMLInputElement>) => {
+    React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setLogin({
       ...login,
@@ -30,28 +34,38 @@ function Login() {
   };
 
   return (
-    <form action="" onSubmit={ handleSubmit }>
-      <label htmlFor="">
-        Login :
-        <input
-          type="text"
-          data-testid="email-input"
-          onChange={ handleChangeLogin }
-          value={ login.email }
-          name="email"
-        />
-      </label>
-      <label htmlFor="">
-        <input
-          type="password"
-          data-testid="password-input"
-          onChange={ handleChangeLogin }
-          value={ login.password }
-          name="password"
-        />
-      </label>
-      <button disabled={ !validateLogin() }>Entrar</button>
-    </form>
+    <Form action="" onSubmit={handleSubmit}>
+      <InputsContainer>
+        <Heading>
+          <ImgLogin src="/dolar.png" alt="" />
+          <span>
+            Wallet
+            <WalletSpan>App</WalletSpan>
+          </span>
+        </Heading>
+        <InputLabel htmlFor="">
+          <span>Login :</span>
+          <input
+            type="text"
+            data-testid="email-input"
+            onChange={handleChangeLogin}
+            value={login.email}
+            name="email"
+          />
+        </InputLabel>
+        <InputLabel htmlFor="">
+          <span>Senha:</span>
+          <input
+            type="password"
+            data-testid="password-input"
+            onChange={handleChangeLogin}
+            value={login.password}
+            name="password"
+          />
+        </InputLabel>
+        <ButtonLogin disabled={!validateLogin()}>Entrar</ButtonLogin>
+      </InputsContainer>
+    </Form>
   );
 }
 

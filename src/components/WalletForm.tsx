@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { GlobalStateType, FormValuesType, Dispatch } from '../types';
 import { newExpenses, finishEditExpense } from '../redux/actions';
+import { InputForm, SelectForm, ButtonAdd } from '../styles/Wallet.styled';
 
 const initialState = {
   id: 0,
@@ -50,27 +51,29 @@ function WalletForm() {
 
   return (
     <form action="" onSubmit={ handleSubmit }>
-      <label htmlFor="">
+      <label htmlFor="value">
         Valor da Despesa:
-        <input
+        <InputForm
           type="text"
           data-testid="value-input"
           name="value"
           onChange={ handleChange }
           value={ formValues.value }
+          placeholder="Digite o valor da despesa"
         />
       </label>
-      <label htmlFor="">
+      <label htmlFor="description">
         Descrição da Despesa:
-        <input
+        <InputForm
           type="text"
           data-testid="description-input"
           name="description"
           onChange={ handleChange }
           value={ formValues.description }
+          placeholder="Digite uma Descrição"
         />
       </label>
-      <select
+      <SelectForm
         name="currency"
         id=""
         data-testid="currency-input"
@@ -79,8 +82,8 @@ function WalletForm() {
         {rootState.wallet.currencies.map((currency) => (
           <option value={ currency } key={ currency }>{currency}</option>
         ))}
-      </select>
-      <select
+      </SelectForm>
+      <SelectForm
         name="method"
         id=""
         data-testid="method-input"
@@ -89,17 +92,17 @@ function WalletForm() {
         <option value="Dinheiro">Dinheiro</option>
         <option value="Cartão de crédito">Cartão de crédito</option>
         <option value="Cartão de débito">Cartão de débito</option>
-      </select>
-      <select name="tag" id="" data-testid="tag-input" onChange={ handleChange }>
+      </SelectForm>
+      <SelectForm name="tag" id="" data-testid="tag-input" onChange={ handleChange }>
         <option value="Alimentação">Alimentação</option>
         <option value="Lazer">Lazer</option>
         <option value="Trabalho">Trabalho</option>
         <option value="Transporte">Transporte</option>
         <option value="Saúde">Saúde</option>
-      </select>
+      </SelectForm>
       {!rootState.wallet.editor
-        ? <button>Adicionar despesa</button>
-        : <button>Editar despesa</button>}
+        ? <ButtonAdd>Adicionar despesa</ButtonAdd>
+        : <ButtonAdd>Editar despesa</ButtonAdd>}
     </form>
   );
 }
